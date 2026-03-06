@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧠 Machine Learning Model Lab</title>
+    <!-- Use Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <h2>Model Configuration</h2>
+
+        <div class="card glass">
+            <h3>Upload Dataset</h3>
+            <input type="file" id="csv-upload" accept=".csv" />
+            <button id="upload-btn" class="btn primary">Upload</button>
+        </div>
+
+        <div id="model-config" class="card glass hidden">
+            <h3>Configuration</h3>
+
+            <label>Problem Type</label>
+            <select id="problem-type">
+                <option value="Classification">Classification</option>
+                <option value="Regression">Regression</option>
+            </select>
+
+            <label>Target Variable</label>
+            <select id="target"></select>
+
+            <label>Test Size</label>
+            <div class="slider-container">
+                <input type="range" id="test-size" min="0.1" max="0.5" step="0.05" value="0.2">
+                <span id="test-size-val">0.2</span>
+            </div>
+
+            <label>Model Type</label>
+            <select id="model-type"></select>
+
+            <button id="run-model-btn" class="btn primary">🚀 Run Model</button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="content">
+        <header>
+            <h1>🧠 Machine Learning Model Lab</h1>
+            <p>Upload a dataset to perform descriptive analysis and train a machine learning model.</p>
+        </header>
+
+        <section id="results-container" class="hidden">
+            <!-- Data Description -->
+            <div class="card gradient-border">
+                <h2>📊 Dataset Overview</h2>
+                
+                <div class="grid col-2">
+                    <div>
+                        <h4>Shape</h4>
+                        <p id="data-shape"></p>
+                    </div>
+                    <div>
+                        <h4>Missing Values Overview</h4>
+                        <p id="data-missing-summary"></p>
+                    </div>
+                </div>
+
+                <div class="grid col-2">
+                    <div>
+                        <h4>Data Types</h4>
+                        <pre id="data-types"></pre>
+                    </div>
+                    <div>
+                        <h4>Summary Statistics</h4>
+                        <pre id="data-describe"></pre>
+                    </div>
+                </div>
+
+                <h4>Correlation Matrix</h4>
+                <div class="img-container">
+                    <img id="correlation-img" src="" alt="Correlation Matrix" />
+                </div>
+            </div>
+            
+            <!-- Features Selection -->
+            <div class="card glass feature-selector hidden" id="feature-selector-card">
+                <h2>🧬 Select Features</h2>
+                <div id="feature-checkboxes" class="checkbox-grid"></div>
+            </div>
+
+            <!-- Model Evaluation Results -->
+            <div id="evaluation-results" class="card gradient-border hidden">
+                <h2>📊 Model Evaluation</h2>
+                <div id="eval-content" class="grid col-2"></div>
+            </div>
+        </section>
+
+        <!-- Loader -->
+        <div id="loader" class="hidden loader-overlay">
+            <div class="spinner"></div>
+            <p>Processing...</p>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
